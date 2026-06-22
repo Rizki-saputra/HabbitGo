@@ -1,2 +1,0 @@
-# HabbitGo
-Habbit App Project
