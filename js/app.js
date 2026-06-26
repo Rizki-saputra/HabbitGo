@@ -43,7 +43,7 @@ function renderHeader() {
   const greeting = hour < 12 ? t('good_morning') : hour < 17 ? t('good_afternoon') : t('good_evening');
 
   document.getElementById('headerGreeting').textContent = greeting;
-  document.getElementById('headerName').textContent = `Hey, ${name} 👋`;
+  document.getElementById('headerName').textContent = `Hello, ${name} 👋`;
   document.getElementById('profileName').textContent = name;
   document.getElementById('profileEmail').textContent = state.user?.email || '';
   document.getElementById('memberSince').textContent = formatDate((profile?.created_at || '').slice(0,10));
