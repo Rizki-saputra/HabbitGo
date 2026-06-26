@@ -40,6 +40,11 @@
   <div class="auth-card glass-card">
     <h2 class="auth-card-title">Welcome back 👋</h2>
     <p class="auth-card-sub">Sign in to continue your streak</p>
+        <!-- Tab Switcher — taruh di atas form login -->
+<div class="auth-tabs">
+  <button class="auth-tab active" id="tabLogin" onclick="switchAuthTab('login')">Sign In</button>
+  <button class="auth-tab" id="tabRegister" onclick="switchAuthTab('register')">Sign Up</button>
+</div>
     <form id="loginForm" onsubmit="handleLogin(event)" autocomplete="on">
       <div class="field-group">
         <label class="field-label">Email</label>
@@ -59,6 +64,44 @@
       <div class="field-error hidden" id="loginError"><i class="bi bi-exclamation-circle"></i><span></span></div>
       <button type="submit" class="btn-primary" id="loginBtn">
         <span class="btn-label">Sign In</span>
+        <span class="btn-loader hidden"><i class="bi bi-arrow-repeat spin"></i></span>
+      </button>
+    </form>
+<!-- Register Form — taruh setelah closing </form> login -->
+    <form id="registerForm" class="hidden" onsubmit="handleRegister(event)" autocomplete="on">
+      <div class="field-group">
+        <label class="field-label">Full Name</label>
+        <div class="field-wrap">
+          <i class="bi bi-person field-icon"></i>
+          <input type="text" class="field-input" id="regName" placeholder="Your name" autocomplete="name" required minlength="2">
+        </div>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Email</label>
+        <div class="field-wrap">
+          <i class="bi bi-envelope field-icon"></i>
+          <input type="email" class="field-input" id="regEmail" placeholder="you@email.com" autocomplete="email" required>
+        </div>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Password</label>
+        <div class="field-wrap">
+          <i class="bi bi-lock field-icon"></i>
+          <input type="password" class="field-input has-toggle" id="regPassword" placeholder="Min. 6 characters" autocomplete="new-password" required minlength="6">
+          <button type="button" class="toggle-pass" onclick="togglePassword('regPassword',this)"><i class="bi bi-eye"></i></button>
+        </div>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Confirm Password</label>
+        <div class="field-wrap">
+          <i class="bi bi-lock field-icon"></i>
+          <input type="password" class="field-input has-toggle" id="regConfirm" placeholder="Repeat password" autocomplete="new-password" required minlength="6">
+          <button type="button" class="toggle-pass" onclick="togglePassword('regConfirm',this)"><i class="bi bi-eye"></i></button>
+        </div>
+      </div>
+      <div class="field-error hidden" id="registerError"><i class="bi bi-exclamation-circle"></i><span></span></div>
+      <button type="submit" class="btn-primary" id="registerBtn">
+        <span class="btn-label">Create Account</span>
         <span class="btn-loader hidden"><i class="bi bi-arrow-repeat spin"></i></span>
       </button>
     </form>
