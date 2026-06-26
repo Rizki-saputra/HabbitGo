@@ -217,6 +217,29 @@ img { max-width: 100%; }
   color: #fff; font-size: 18px; display: flex; align-items: center; justify-content: center;
   box-shadow: 0 4px 14px var(--p-soft);
 }
+/* Auth Tabs — tambahkan setelah .auth-card-sub */
+.auth-tabs {
+  display: flex;
+  background: var(--p-soft);
+  border-radius: var(--r-xs);
+  padding: 4px;
+  gap: 4px;
+  margin-bottom: 20px;
+}
+.auth-tab {
+  flex: 1;
+  height: 38px;
+  border-radius: var(--r-xs);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-2);
+  transition: all .2s;
+}
+.auth-tab.active {
+  background: linear-gradient(135deg, var(--p1), var(--p2));
+  color: #fff;
+  box-shadow: 0 2px 8px var(--p-soft);
+}
 
 /* ---------- App Shell ---------- */
 .app {
