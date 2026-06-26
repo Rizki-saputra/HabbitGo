@@ -94,3 +94,53 @@ function renderAvatars(url) {
 function getInitials(name) {
   return (name || '?').split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
 }
+// Tab switcher
+function switchAuthTab(tab) {
+  document.getElementById('loginForm').classList.toggle('hidden', tab !== 'login');
+  document.getElementById('registerForm').classList.toggle('hidden', tab !== 'register');
+  document.getElementById('tabLogin').classList.toggle('active', tab === 'login');
+  document.getElementById('tabRegister').classList.toggle('active', tab !== 'login');
+  document.getElementById('loginError').classList.add('hidden');
+  document.getElementById('registerError').classList.add('hidden');
+}
+
+// Register handler
+async function handleRegister(e) {
+  e.preventDefault();
+  const name     = document.getElementById('regName').value.trim();
+  const email    = document.getElementById('regEmail').value.trim();
+  const password = document.getElementById('regPassword').value;
+  const confirm  = document.getElementById('regConfirm').value;
+  const errEl    = document.getElementById('registerError');
+  const btn      = document.getElementById('registerBtn');
+
+  // Validasi
+  if (password !== confirm) {
+    errEl.querySelector('span').textContent = 'Passwords do not match.';
+    errEl.classList.remove('hidden'); return;
+  }
+
+  btn.querySelector('.btn-label').classList.add('hidden');
+  btn.querySelector('.btn-loader').classList.remove('hidden');
+  btn.disabled = true;
+
+  const { data, error } = await sb.auth.signUp({
+    email, password,
+    options: { data: { name } }
+  });
+
+  btn.querySelector('.btn-label').classList.remove('hidden');
+  btn.querySelector('.btn-loader').classList.add('hidden');
+  btn.disabled = false;
+
+  if (error) {
+    errEl.querySelector('span').textContent = error.message;
+    errEl.classList.remove('hidden'); return;
+  }
+
+  // Auto login setelah register (karena email confirm dimatikan)
+  state.user = data.user;
+  await loadUserData();
+  showApp();
+  showToast('Welcome to HabitGo! 🎉');
+}
